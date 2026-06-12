@@ -1,0 +1,118 @@
+
+/* ── MAIN CONTENT ── */
+
+.topbar-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-btn {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.welcome {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Banner */
+.banner {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  width: 100%;
+}
+
+.banner-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #111;
+}
+
+.banner-deadline {
+  color: #e87c3e;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* Course Cards */
+.course-cards {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.course-card {
+  background: #2a3580;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 10px;
+  flex: 1;
+  min-width: 140px;  /* ← was min-height, now min-width */
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.course-card small {
+  font-weight: 400;
+  color: #aab;
+}
+
+/* Progress Grid */
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.progress-card {
+  background: #0a1045;
+  color: white;
+  padding: 16px 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.progress-value {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Notification Panel */
+.notification-panel {
+  position: fixed;
+  right: 20px;
+  top: 60px;
+  width: 260px;
+  background: #f5f0e8;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  z-index: 100;
+}
+
+.notification-title {
+  font-weight: bold;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.notification-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.notif-avatar { font-size: 22px; }
+.notif-text   { font-size: 12px; color: #444; }
+.notif-text small { color: #999; }

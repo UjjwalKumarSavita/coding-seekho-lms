@@ -1,0 +1,205 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ✅ UPDATED — removed display:flex centering from body (was causing conflict with #root) */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+}
+
+/* ✅ NEW — this does the centering now, replaces body flex */
+.auth-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #1a1a2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* UNCHANGED below this line */
+.auth-wrapper {
+  background-color: #eef1f5;
+  padding: 40px 35px;
+  border-radius: 16px;
+  width: 360px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.auth-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.auth-logo img { width: 60px; }
+
+.auth-wrapper h2 {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.auth-wrapper label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.auth-wrapper input {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #dde3ec;
+  margin-bottom: 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+.auth-wrapper button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0a1045;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.auth-wrapper button:hover { background-color: #1a2060; }
+
+.auth-bottom {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 13px;
+  color: #555;
+}
+
+.auth-bottom a {
+  color: #0a1045;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.remember-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #555;
+}
+
+.remember-row a { color: #555; text-decoration: none; }
+
+
+
+/* * { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: #1a1a2e;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.auth-wrapper {
+  background-color: #eef1f5;
+  padding: 40px 35px;
+  border-radius: 16px;
+  width: 360px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.auth-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.auth-logo img {
+  width: 60px;
+}
+
+.auth-wrapper h2 {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.auth-wrapper label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.auth-wrapper input {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #dde3ec;
+  margin-bottom: 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+.auth-wrapper button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0a1045;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.auth-wrapper button:hover {
+  background-color: #1a2060;
+}
+
+.auth-bottom {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 13px;
+  color: #555;
+}
+
+.auth-bottom a {
+  color: #0a1045;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.remember-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #555;
+}
+
+.remember-row a {
+  color: #555;
+  text-decoration: none;
+}
+
+.one{
+  display: flex;
+  flex-direction: row;
+} */

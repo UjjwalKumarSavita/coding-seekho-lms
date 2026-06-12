@@ -1,0 +1,175 @@
+.app-container {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+  background: #eef1f5;
+}
+
+/* Profile Card */
+.profile-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-photo-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #0a1045;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.photo-edit-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: white;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  font-size: 13px;
+}
+
+.profile-username {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+
+.profile-email {
+  font-size: 14px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.profile-joined {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* Message */
+.settings-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Settings Menu */
+.settings-menu {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s;
+}
+
+.settings-item:hover       { background: #f5f5f5; }
+.settings-item.active-setting { background: #eef1f5; font-weight: 600; }
+.settings-item:last-child  { border-bottom: none; }
+
+/* Settings Section */
+.settings-section {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-section h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+}
+
+.settings-section p {
+  font-size: 14px;
+  color: #888;
+}
+
+.settings-section input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.settings-section button {
+  padding: 12px;
+  background: #0a1045;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.settings-section button:hover { background: #1a2060; }
+
+/* Logout */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  background: white;
+  border-radius: 12px;
+  color: #dc3545;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover { background: #ffe5e5; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-content { padding: 16px; max-width: 100%; }
+  .profile-card { flex-direction: column; text-align: center; }
+}

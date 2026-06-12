@@ -1,0 +1,38 @@
+# Previous frontend-only repository metadata backup
+/.frontend-git-backup/
+
+# Local design-review artifacts and logs
+/pdf_pages/
+/a_pdf_text.txt
+/*.log
+
+# Environment and secrets
+**/.env
+**/.env.local
+**/.env.*.local
+!**/.env.example
+
+# Frontend dependencies and output
+**/node_modules/
+**/build/
+**/coverage/
+**/.pnp/
+**/.pnp.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Backend output and runtime files
+**/target/
+**/uploads/
+*.class
+
+# IDE and operating-system files
+**/.idea/
+**/.vscode/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+Thumbs.db
+
