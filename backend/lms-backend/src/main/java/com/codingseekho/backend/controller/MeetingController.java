@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.transaction.annotation.Transactional;
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -25,6 +26,22 @@ public class MeetingController {
     private final CurrentUserService currentUserService;
     private final AccessService accessService;
     private final NotificationService notificationService;
+    private final EnrollmentRepository enrollmentRepository;
+
+    @GetMapping("/schedule")
+    public List<MeetingView> schedule() {
+        User user = currentUserService.get();
+        List<Long> batchIds = user.getRole() == Role.ADMIN
+                ? batchRepository.findAll().stream().filter(Batch::isActive).map(Batch::getId).toList()
+                : enrollmentRepository.findByUserIdOrderByCreatedAtDesc(user.getId()).stream()
+                        .filter(enrollment -> enrollment.getStatus() == EnrollmentStatus.ACTIVE)
+                        .map(enrollment -> enrollment.getBatch().getId()).toList();
+        return batchIds.stream()
+                .flatMap(batchId -> meetingRepository.findByBatchIdOrderByScheduledAtDesc(batchId).stream())
+                .sorted(Comparator.comparing(Meeting::getScheduledAt))
+                .map(this::view)
+                .toList();
+    }
 
     @GetMapping("/batch/{batchId}")
     public List<MeetingView> meetings(@PathVariable Long batchId) {
