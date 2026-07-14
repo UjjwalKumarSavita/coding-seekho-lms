@@ -8,6 +8,10 @@ import BatchWorkspace from './pages/BatchWorkspace';
 import Support from './pages/Support';
 import Admin from './pages/Admin';
 import Settings from './pages/Settings';
+import Schedule from './pages/Schedule';
+import Quizzes from './pages/Quizzes';
+import Doubts from './pages/Doubts';
+import { ThemeProvider } from './ThemeContext';
 
 function Protected() {
   const { user, ready } = useAuth();
@@ -28,21 +32,26 @@ function AdminOnly() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <Routes>
-          <Route path="/" element={<PublicOnly />} />
-          <Route element={<Protected />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/batches" element={<Batches />} />
-            <Route path="/batches/:batchId" element={<BatchWorkspace />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="/admin" element={<AdminOnly />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <Routes>
+            <Route path="/" element={<PublicOnly />} />
+            <Route element={<Protected />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/batches" element={<Batches />} />
+              <Route path="/batches/:batchId" element={<BatchWorkspace />} />
+              <Route path="/schedule" element={<Schedule />} />
+              <Route path="/quizzes" element={<Quizzes />} />
+              <Route path="/doubts" element={<Doubts />} />
+              <Route path="/support" element={<Support />} />
+              <Route path="/admin" element={<AdminOnly />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }

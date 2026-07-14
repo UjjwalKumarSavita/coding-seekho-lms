@@ -1,15 +1,34 @@
 import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Bell,
+  BookOpen,
+  CalendarDays,
+  ChevronLeft,
+  ChevronRight,
+  CircleHelp,
+  ClipboardCheck,
+  LayoutDashboard,
+  LogOut,
+  MessageCircleQuestion,
+  Moon,
+  Settings,
+  ShieldCheck,
+  Sun,
+  UsersRound,
+  X
+} from 'lucide-react';
 import { useAuth } from '../AuthContext';
+import { useTheme } from '../ThemeContext';
 import { api } from '../api';
 import Logo from './Logo';
 
-const icons = { dashboard: '⌂', batches: '▤', support: '◌', admin: '◇', settings: '⚙' };
-
 export default function AppLayout() {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
-  const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
+  const [collapsed, setCollapsed] = useState(() => localStorage.getItem('llc_sidebar_collapsed') === 'true');
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
 
@@ -17,12 +36,23 @@ export default function AppLayout() {
     api('/notifications').then(setNotifications).catch(() => {});
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('llc_sidebar_collapsed', collapsed);
+  }, [collapsed]);
+
+  useEffect(() => {
+    setShowNotifications(false);
+  }, [location.pathname]);
+
   const nav = [
-    ['dashboard', 'Dashboard', '/dashboard'],
-    ['batches', 'My batches', '/batches'],
-    ['support', user.role === 'STUDENT' ? 'LLC support' : 'Student support', '/support'],
-    ...(user.role === 'ADMIN' ? [['admin', 'Administration', '/admin']] : []),
-    ['settings', 'Settings', '/settings']
+    [LayoutDashboard, 'Dashboard', '/dashboard'],
+    [UsersRound, 'My batches', '/batches'],
+    [CalendarDays, 'Schedule', '/schedule'],
+    [ClipboardCheck, 'Quizzes', '/quizzes'],
+    [MessageCircleQuestion, 'Doubts', '/doubts'],
+    [CircleHelp, user.role === 'STUDENT' ? 'LLC support' : 'Student support', '/support'],
+    ...(user.role === 'ADMIN' ? [[ShieldCheck, 'Administration', '/admin']] : []),
+    [Settings, 'Settings', '/settings']
   ];
   const unread = notifications.filter(item => !item.read).length;
 
@@ -41,34 +71,54 @@ export default function AppLayout() {
         <div className="sidebar-brand">
           <Logo compact={collapsed} />
           <button className="icon-button sidebar-toggle" onClick={() => setCollapsed(value => !value)}
-            aria-label="Toggle menu">☰</button>
+            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}>
+            {collapsed ? <ChevronRight aria-hidden="true" /> : <ChevronLeft aria-hidden="true" />}
+          </button>
         </div>
         <div className="profile-mini">
           <Avatar user={user} />
           {!collapsed && <div><strong>{user.username}</strong><small>{user.role}</small></div>}
         </div>
         <nav>
-          {nav.map(([icon, label, path]) => (
-            <NavLink key={path} to={path} className={({ isActive }) => isActive ? 'active' : ''}>
-              <span>{icons[icon]}</span>{!collapsed && label}
+          {nav.map(([Icon, label, path]) => (
+            <NavLink key={path} to={path} className={({ isActive }) => isActive ? 'active' : ''}
+              aria-label={label} title={collapsed ? label : undefined}>
+              <span className="nav-icon"><Icon aria-hidden="true" /></span>
+              <span className="nav-label">{label}</span>
             </NavLink>
           ))}
         </nav>
-        <button className="sidebar-logout" onClick={logout}><span>↪</span>{!collapsed && 'Sign out'}</button>
+        <button className="sidebar-logout" onClick={logout} aria-label="Sign out"
+          title={collapsed ? 'Sign out' : undefined}>
+          <span className="nav-icon"><LogOut aria-hidden="true" /></span>
+          <span className="nav-label">Sign out</span>
+        </button>
       </aside>
       <main className="main-area">
         <header className="topbar">
           <div><small>LLC WORLD</small><strong>Learn deeply. Build confidently.</strong></div>
           <div className="top-actions">
-            <button className="notification-button" onClick={() => setShowNotifications(value => !value)}>
-              ♢{unread > 0 && <b>{unread}</b>}
+            <button className="theme-toggle" onClick={toggleTheme}
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
+              <span className="theme-icon" key={theme}>
+                {theme === 'light' ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
+              </span>
+            </button>
+            <button className="notification-button" onClick={() => setShowNotifications(value => !value)}
+              aria-label={`Notifications${unread ? `, ${unread} unread` : ''}`} aria-expanded={showNotifications}>
+              <Bell aria-hidden="true" />{unread > 0 && <b>{unread}</b>}
             </button>
             <Avatar user={user} />
           </div>
         </header>
         {showNotifications && (
           <div className="notification-drawer">
-            <div className="drawer-title"><strong>Notifications</strong><button onClick={() => setShowNotifications(false)}>×</button></div>
+            <div className="drawer-title"><strong>Notifications</strong>
+              <button onClick={() => setShowNotifications(false)} aria-label="Close notifications">
+                <X aria-hidden="true" />
+              </button></div>
             {notifications.length === 0 && <Empty text="You are all caught up." />}
             {notifications.map(item => (
               <button key={item.id} className={`notification-item ${item.read ? '' : 'unread'}`}
@@ -79,7 +129,7 @@ export default function AppLayout() {
             ))}
           </div>
         )}
-        <div className="page-content"><Outlet /></div>
+        <div className="page-content route-stage" key={location.pathname}><Outlet /></div>
       </main>
     </div>
   );
@@ -92,7 +142,7 @@ export function Avatar({ user, size = 'normal' }) {
 }
 
 export function Empty({ text }) {
-  return <div className="empty-state"><span>LLC</span><p>{text}</p></div>;
+  return <div className="empty-state"><span><BookOpen aria-hidden="true" /></span><p>{text}</p></div>;
 }
 
 export function formatDate(value) {

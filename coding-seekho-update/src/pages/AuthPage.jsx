@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../AuthContext';
 import { api, jsonBody } from '../api';
 import Logo from '../components/Logo';
+import { useTheme } from '../ThemeContext';
+import { Moon, Sun } from 'lucide-react';
 
 export default function AuthPage() {
   const { login, register } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [mode, setMode] = useState('login');
   const [form, setForm] = useState({ username: '', email: '', password: '', code: '', newPassword: '' });
   const [catalog, setCatalog] = useState([]);
@@ -39,6 +42,10 @@ export default function AuthPage() {
   const titles = { login: 'Welcome back', register: 'Create your student account', forgot: 'Recover your account', reset: 'Enter your OTP' };
   return (
     <div className="auth-layout">
+      <button className="auth-theme-toggle" onClick={toggleTheme}>
+        {theme === 'light' ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
+        <span>{theme === 'light' ? 'Dark mode' : 'Light mode'}</span>
+      </button>
       <section className="auth-showcase">
         <Logo />
         <div className="auth-copy">
