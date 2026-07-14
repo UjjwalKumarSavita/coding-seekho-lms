@@ -5,6 +5,7 @@
 /pdf_pages/
 /a_pdf_text.txt
 /*.log
+**/*.log
 
 # Environment and secrets
 **/.env
@@ -35,4 +36,3 @@ yarn-error.log*
 *.ipr
 .DS_Store
 Thumbs.db
-
